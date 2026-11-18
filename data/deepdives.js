@@ -7,7 +7,7 @@
   if (parts.length !== 9) throw new Error("Fiche mal formée : " + parts[0] + " (" + parts.length + ")");
   const [name, intuition, params, steps, demo, outcome, edges, complexity, nuance] = parts;
   if (enriched.has(name)) throw new Error("Doublon : " + name);
-  enriched.set(name,{intuition,params,steps:steps.split("~"),demo,outcome,edges:edges.split(" ; "),complexity,nuance});
+  enriched.set(name,{intuition,params,steps:steps.split("~"),demo,outcome,edges:edges.split(/;\s*/),complexity,nuance});
  }
  window.DEEP_DIVES = Object.fromEntries(enriched);
 })();
