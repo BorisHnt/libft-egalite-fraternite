@@ -1,0 +1,41 @@
+name: Validate C references
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/**"
+      - "scripts/export-references.mjs"
+      - "tests/**"
+      - ".github/workflows/check-references.yml"
+  pull_request:
+    paths:
+      - "data/**"
+      - "scripts/export-references.mjs"
+      - "tests/**"
+      - ".github/workflows/check-references.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate the 43 standalone source files
+        run: node scripts/export-references.mjs
+      - name: Compile with warnings treated as errors
+        run: |
+          cc -std=c99 -Wall -Wextra -Werror -I generated \
+            generated/ft_*.c tests/smoke.c -o generated/verify
+      - name: Execute functional smoke tests
+        run: ./generated/verify
+      - name: Install official Norminette
+        run: python -m pip install norminette
+      - name: Check 42 Norm
+        run: norminette generated/ft_*.c
