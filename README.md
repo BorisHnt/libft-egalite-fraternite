@@ -1,63 +1,48 @@
 # Libft, Égalité, Fraternité
 
-Un manuel interactif et pédagogique des fonctions C, dans l'esprit de SwimmingPy et SysAndNetAdmin.
+Manuel interactif des fonctions de Libft et des fonctions voisines du langage C. Pensé pour comprendre **ce que fait une fonction, pourquoi son implémentation marche et comment éviter les pièges**, plutôt que pour recopier du code.
 
-**Site en ligne :** [Ouvrir le site](https://borishnt.github.io/libft-egalite-fraternite/)
+**[Ouvrir le site](https://borishnt.github.io/libft-egalite-fraternite/)**
 
-## Au programme
+## Contenu du manuel
 
-- **43 fonctions Libft** identifiées dans l'archive fournie, datée de novembre 2025 ;
-- **14 fonctions cousines**, clairement distinguées des fonctions de l'archive ;
-- **57 fiches approfondies** avec paramètres expliqués, déroulement pas à pas, exemple à révéler, résultat à deviner, cas limites, complexité, normes et fonctions liées ;
-- **10 visualisations de mémoire interactives**, notamment `ft_strlen`, `ft_memmove`, `ft_strlcpy`, `ft_split` et les listes chaînées ;
-- une implémentation de référence pour chacune des 43 fonctions, **masquée derrière un voile flouté** ;
-- recherche, filtre par famille/niveau, navigation responsive, thème bleu pastel ;
-- zéro bibliothèque externe et zéro compte requis.
+- **43 fonctions Libft** : chaînes, caractères, mémoire, conversions, allocations, listes chaînées et sorties.
+- **14 fonctions cousines** pour comparer les interfaces de la bibliothèque C, de POSIX et de BSD.
+- **57 fiches approfondies** : signature, paramètres, valeur de retour, invariants de boucle, comportement mémoire, préconditions, complexité et cas limites.
+- Des exemples à examiner avant de révéler leur résultat et **10 parcours visuels interactifs** pour la mémoire et les listes.
+- Une **page de lecture centrale** pour chaque fonction, avec sommaire, URL directe et navigation précédente/suivante.
+- Une **implémentation pédagogique de référence** pour chaque fonction Libft. Le code est masqué jusqu'au clic sur « Révéler le code ».
+- Recherche dans les fiches, filtres, interface responsive en bleu pastel et aucune dépendance côté navigateur.
 
-Les exemples sont originaux. Les sujets officiels 42 ne sont pas inclus ni recopiés. Le code de l'archive originale n'est pas présenté comme un modèle irréprochable.
+Les explications sont indépendantes des sujets officiels 42, qui ne sont ni reproduits ni intégrés.
 
-## Consulter le site
+## Utilisation
 
-Ouvrir `index.html` localement dans un navigateur ou utiliser GitHub Pages.
+Le site fonctionne directement avec `index.html` dans un navigateur, ou depuis GitHub Pages. Pour ouvrir une fonction spécifique, les URL ressemblent à :
 
-Les implémentations sont volontairement **cachées au premier affichage** pour favoriser la réflexion avant de regarder la solution. Cliquer sur « Révéler le code » pour les lire ou les copier, puis « Masquer à nouveau » pour revenir à l'état initial.
+```text
+https://borishnt.github.io/libft-egalite-fraternite/#/fonction/ft_memmove
+```
 
-## Vérifier les références C
+La navigation entre fonctions reste dans la page principale, sans fenêtre latérale masquant le contenu.
+
+## Contrôle des références C
 
 ```sh
 node scripts/export-references.mjs
 cc -std=c99 -Wall -Wextra -Werror -I generated \
-    generated/ft_*.c tests/smoke.c -o generated/verify
+  generated/ft_*.c tests/smoke.c -o generated/verify
 ./generated/verify
 norminette generated/ft_*.c
 ```
 
-La CI GitHub Actions exécute automatiquement ces vérifications, ainsi qu'un contrôle de syntaxe JavaScript. Elle compile les 43 sources et lance un premier jeu de tests ciblés, mais **ne remplace pas une campagne exhaustive** de tests différentiels, de sanitizers et de cas limites.
+La CI vérifie également la syntaxe JavaScript, la couverture des fiches, des scénarios de bord supplémentaires et des tests sous AddressSanitizer et UndefinedBehaviorSanitizer. Les contrôles réussis **ne constituent pas une preuve absolue de correction** sur toutes les architectures ou toutes les entrées possibles.
 
-Certaines fonctions (notamment `ft_atoi` en cas de dépassement et `ft_memmove` pour l'ordre d'adresses d'objets distincts) ont des subtilités de portabilité : l'objectif est de documenter ces limites explicitement, plutôt que de promettre une « perfection » universelle.
+Les fonctions sont décrites selon leurs contrats respectifs : ISO C, POSIX, BSD ou conventions de Libft. La présence d'une implémentation de référence ne signifie pas qu'il s'agit de l'unique manière correcte de procéder.
 
-## Sources de référence
+## Sources techniques et normes
 
-- [La Norme officielle 42](https://github.com/42School/norminette)
-- Normes ISO C et pages de manuel pour les fonctions pertinentes, selon leur disponibilité
-- Code Libft fourni par l'auteur (utilisé pour recenser les interfaces, pas recopié tel quel)
-
-
-## Principes éditoriaux
-
-Une **fonction présente dans Libft** ne signifie pas automatiquement que l'implémentation archivée est correcte. Les fiches privilégient le contrat de l'API et une réalisation pédagogique distincte. La comparaison avec les standards distingue toujours :
-
-- **ISO C** : fonctions garanties par le langage, selon l'édition du standard ;
-- **POSIX/BSD** : extensions disponibles selon le système et la bibliothèque C ;
-- **Libft / 42** : fonctions pédagogiques ft_ avec leur propre interface.
-
-Les exemples visibles dans les leçons sont des fragments de C, pas forcément des programmes autonomes. Tous les blocs d'implémentation de référence sont masqués au premier affichage.
-
-## Repères et références
-
-- [La Norminette officielle](https://github.com/42School/norminette) — outil de vérification de la Norme 42 ;
-- [Manuel OpenBSD strlcpy / strlcat](https://man.openbsd.org/strlcpy.3) — sémantique et valeurs de retour ;
-- [Man-pages Linux](https://man7.org/linux/man-pages/) — pages de manuels C et POSIX ;
-- [Document de travail C23 (N3220)](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf) — utile pour distinguer les éditions de la norme C.
-
-**Prochain niveau de rigueur** : tests de propriétés génératifs, validation croisée sur plusieurs libc/architectures et revue des cas sous-spécifiés de \`atoi\`, des pointeurs et des allocations extrêmes.
+- [La Norminette officielle 42](https://github.com/42School/norminette)
+- [Les pages de manuel Linux](https://man7.org/linux/man-pages/)
+- [Manuel OpenBSD de strlcpy/strlcat](https://man.openbsd.org/strlcpy.3)
+- [Document de travail C23 (WG14 N3220)](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf)
