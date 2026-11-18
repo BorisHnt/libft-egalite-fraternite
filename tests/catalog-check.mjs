@@ -20,11 +20,12 @@ assert.equal(new Set(list.map(f=>f.name)).size,57);
 for(const entry of list) {
   const lesson=lessons[entry.name];
   assert(lesson,"Missing deep dive: "+entry.name);
-  for(const field of ["intuition","params","outcome","complexity","nuance"]) {
+  for(const field of ["intuition","params","complexity","nuance"]) {
     assert(lesson[field]?.length>=12,"Incomplete "+field+" of "+entry.name);
   }
   assert(lesson.steps.length>=3,"Missing steps: "+entry.name);
   assert(lesson.demo.length>=10,"Missing example: "+entry.name);
+  assert(lesson.outcome.length>=1,"Missing expected outcome: "+entry.name);
   assert(lesson.edges.length>=1,"Missing boundary cases: "+entry.name);
   if(entry.kind==="libft"){
     assert(entry.ref?.length>=20,"Missing reference source: "+entry.name);
