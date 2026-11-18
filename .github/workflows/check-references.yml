@@ -27,6 +27,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Validate website JavaScript syntax
+        run: |
+          node --check data/catalog.js
+          node --check data/references.js
+          node --check scripts/app.js
       - name: Generate the 43 standalone source files
         run: node scripts/export-references.mjs
       - name: Compile with warnings treated as errors
