@@ -13,8 +13,8 @@ const lessons = context.window.DEEP_DIVES;
 const traces = context.window.MANUAL_TRACES;
 assert(Array.isArray(list),"Missing catalog");
 assert.equal(list.length,57,"Expected 57 individual function fiches");
-const archived=list.filter(item=>item.kind==="libft");
-assert.equal(archived.length,43,"Expected 43 functions from the Libft archive");
+const libftItems=list.filter(item=>item.kind==="libft");
+assert.equal(libftItems.length,43,"Expected 43 Libft functions");
 assert.equal(list.filter(item=>item.kind==="cousin").length,14);
 assert.equal(new Set(list.map(f=>f.name)).size,57);
 for(const entry of list) {
