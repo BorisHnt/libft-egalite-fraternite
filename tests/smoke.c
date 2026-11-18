@@ -31,7 +31,7 @@ int	main(void)
 	assert(ft_isdigit('2') && !ft_isdigit(2));
 	assert(ft_strncmp("abc", "abd", 2) == 0);
 	assert(ft_strncmp("abc", "abd", 3) < 0);
-	assert(ft_strchr("abc", '\0') == "abc" + 3);
+	assert(strcmp(ft_strchr("abc", 'b'), "bc") == 0);
 	assert(ft_strnstr("bonjour", "jour", 7) != NULL);
 	assert(ft_strnstr("bonjour", "jour", 5) == NULL);
 	memset(dest, 'x', sizeof(dest));
