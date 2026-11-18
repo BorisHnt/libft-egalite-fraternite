@@ -31,7 +31,12 @@ jobs:
         run: |
           node --check data/catalog.js
           node --check data/references.js
+          node --check data/deepdives.js
+          node --check data/traces.js
+          node --check scripts/deep-dive-ui.js
           node --check scripts/app.js
+      - name: Check lessons and trace coverage
+        run: node tests/catalog-check.mjs
       - name: Generate the 43 standalone source files
         run: node scripts/export-references.mjs
       - name: Compile with warnings treated as errors
