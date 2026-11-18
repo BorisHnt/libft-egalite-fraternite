@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - "data/**"
+      - "index.html"
+      - "scripts/**"
+      - "styles/**"
       - "scripts/export-references.mjs"
       - "tests/**"
       - ".github/workflows/check-references.yml"
@@ -33,8 +36,14 @@ jobs:
           node --check data/references.js
           node --check data/deepdives.js
           node --check data/traces.js
+          node --check data/precisions.js
+          node --check scripts/precision-ui.js
           node --check scripts/deep-dive-ui.js
           node --check scripts/app.js
+      - name: Test central reader in a browser-like DOM
+        run: |
+          npm install --no-save --ignore-scripts --no-audit --no-fund jsdom@26.1.0
+          node tests/ui-check.mjs
       - name: Check lessons and trace coverage
         run: node tests/catalog-check.mjs
       - name: Generate the 43 standalone source files
