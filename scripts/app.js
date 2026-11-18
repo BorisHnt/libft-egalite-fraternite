@@ -53,7 +53,9 @@
     if (state.view !== "all" && state.view !== "concepts" && f.kind !== state.view) return false;
     if (state.family !== "all" && f.group !== state.family) return false;
     if (state.level !== "all" && f.level !== state.level) return false;
-    const words = [f.name,f.group,f.purpose,f.mechanism,f.trap,f.prototype,...f.related].join(" ");
+    const deep = window.DEEP_DIVES && window.DEEP_DIVES[f.name];
+    const extra = deep ? [deep.intuition,deep.params,...deep.steps,deep.nuance] : [];
+    const words = [f.name,f.group,f.purpose,f.mechanism,f.trap,f.prototype,...f.related,...extra].join(" ");
     return normalize(words).includes(normalize(state.query));
   }
   function render() {
@@ -150,6 +152,9 @@
     section(body,"Comment ça fonctionne",f.mechanism);
     section(body,"Valeur de retour",f.result);
     section(body,"Attention au piège",f.trap,true);
+    if (typeof window.renderDeepDive === "function") {
+      window.renderDeepDive(body,f,sourceSection);
+    }
     if (f.example) sourceSection(body,"Exemple d'utilisation",f.example,"Exemple pédagogique : adapter les includes, le contexte et les arguments.");
     if (f.ref) sourceSection(body,"Implémentation de référence",f.ref,"Extrait de référence compilé et passé dans la Norminette en CI. Les tests fonctionnels actuels ne couvrent pas encore tous les cas possibles.");
     else if (f.kind === "libft") section(body,"Implémentation de référence","Une version relue et testée sera ajoutée ici ; aucun code non vérifié n'est présenté comme solution parfaite.");
