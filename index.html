@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e8f2ff">
+  <meta name="description" content="Un manuel interactif des fonctions Libft et des fonctions cousines du langage C, clair du premier pointeur aux subtilités mémoire.">
+  <title>Libft, Égalité, Fraternité — Manuel C</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Aller au contenu</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar" aria-label="Navigation des fonctions">
+    <div class="brand"><div class="brand-symbol" aria-hidden="true">{ }</div><div><span class="brand-eyebrow">Le manuel du C</span><strong>Libft, Égalité,<br>Fraternité.</strong></div></div>
+    <p class="sidebar-intro">Comprendre avant de recopier.</p>
+    <button class="sidebar-mobile-close" id="close-nav" type="button">Fermer le menu <span aria-hidden="true">×</span></button>
+    <nav aria-label="Navigation principale">
+      <button type="button" class="nav-item selected" data-view="all"><span aria-hidden="true">▦</span> Explorer les fonctions <span id="nav-total" class="nav-count">—</span></button>
+      <button type="button" class="nav-item" data-view="libft"><span aria-hidden="true">◎</span> Ma Libft <span id="nav-libft" class="nav-count">—</span></button>
+      <button type="button" class="nav-item" data-view="cousins"><span aria-hidden="true">✳</span> Fonctions cousines <span id="nav-cousins" class="nav-count">—</span></button>
+      <button type="button" class="nav-item" data-view="concepts"><span aria-hidden="true">◇</span> Les concepts</button>
+    </nav>
+    <h2 class="sidebar-label">Familles</h2>
+    <nav id="family-nav" class="family-nav" aria-label="Familles de fonctions"></nav>
+    <div class="sidebar-footer">
+      <p>Les trois carnets de révision</p>
+      <a href="https://github.com/BorisHnt/SwimmingPy">SwimmingPy <span aria-hidden="true">↗</span></a>
+      <a href="https://github.com/BorisHnt/SysAndNetAdmin">Sys &amp; Net Admin <span aria-hidden="true">↗</span></a>
+      <a href="https://github.com/BorisHnt/libft-egalite-fraternite">Source du manuel <span aria-hidden="true">↗</span></a>
+    </div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar">
+      <button id="open-nav" class="mobile-menu" type="button" aria-label="Ouvrir la navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
+      <div class="breadcrumbs">Documentation <span>/</span> <strong id="breadcrumb">Toutes les fonctions</strong></div>
+      <div class="topbar-right"><span class="status-dot" aria-hidden="true"></span> 100 % local · sans compte</div>
+    </header>
+    <main id="content" tabindex="-1">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy"><span class="eyebrow"><span class="spark" aria-hidden="true">✳</span> Le C, sans brouillard</span>
+          <h1 id="hero-title">Libft, Égalité,<br><em>Fraternité.</em></h1>
+          <p>Un manuel qui explique le <strong>pourquoi</strong>, le <strong>comment</strong> et surtout les pièges. De ta première fonction à la mémoire, aux chaînes et aux listes chaînées.</p>
+          <div class="hero-actions"><button class="primary-button" id="start-reading" type="button">Commencer avec ft_strlen <span aria-hidden="true">→</span></button><button class="secondary-button" id="jump-guide" type="button">Voir les concepts</button></div>
+        </div>
+        <div class="hero-graphic" aria-hidden="true"><div class="window-dots"><i></i><i></i><i></i></div><pre><span class="syntax-muted">// On ne récite pas.</span>
+<span class="syntax-keyword">size_t</span> <span class="syntax-function">ft_strlen</span>(<span class="syntax-keyword">const char</span> *s)
+{
+  <span class="syntax-keyword">size_t</span> i = 0;
+  <span class="syntax-keyword">while</span> (s[i])
+    i++;
+  <span class="syntax-keyword">return</span> (i);
+}</pre><div class="code-caption">on comprend.</div></div>
+      </section>
+      <section class="metrics" aria-label="Statistiques du catalogue">
+        <div><strong id="count-all">—</strong><span>Fiches au total</span></div>
+        <div><strong id="count-libft">—</strong><span>Fonctions de l'archive</span></div>
+        <div><strong id="count-cousins">—</strong><span>Fonctions cousines</span></div>
+        <div><strong>0</strong><span>Dépendance externe</span></div>
+      </section>
+      <section class="workspace" id="workspace" aria-label="Explorateur de fonctions">
+        <div class="section-head"><div><span class="eyebrow">Explorer</span><h2 id="section-title">Toutes les fonctions</h2><p id="section-subtitle">Une question, une fonction, une explication.</p></div><div class="legend"><span class="tag libft">Dans l'archive</span><span class="tag cousin">Pour aller plus loin</span></div></div>
+        <div class="tools">
+          <label class="searchbox" for="search"><span aria-hidden="true">⌕</span><input type="search" id="search" placeholder="Chercher une fonction, un piège, un concept..." autocomplete="off"><kbd>/</kbd></label>
+          <label class="select-wrap"><span>Famille</span><select id="family-filter" aria-label="Filtrer par famille"><option value="all">Toutes les familles</option></select></label>
+          <label class="select-wrap"><span>Niveau</span><select id="level-filter" aria-label="Filtrer par niveau"><option value="all">Tous les niveaux</option><option value="Débutant">Débutant</option><option value="Intermédiaire">Intermédiaire</option><option value="Avancé">Avancé</option></select></label>
+        </div>
+        <div class="results-heading"><span id="result-count">Chargement…</span><button type="button" id="reset-filters" class="text-button">Effacer les filtres</button></div>
+        <div class="card-grid" id="cards" aria-live="polite"></div>
+        <p id="empty-state" class="empty-state" hidden>Aucune fonction ne correspond à cette recherche. Essaye une autre orthographe ou enlève un filtre.</p>
+      </section>
+      <section id="concepts" class="concepts" aria-labelledby="concepts-title">
+        <span class="eyebrow">Les fondamentaux</span><h2 id="concepts-title">Ce qu'un man ne t'explique pas toujours.</h2>
+        <p>Quelques repères pour comprendre les fiches, pas seulement les lire.</p>
+        <div class="concept-grid">
+          <article><span class="concept-number">01</span><h3>Un pointeur n'est pas une chaîne</h3><p>Un pointeur contient une adresse. Une chaîne C est une suite d'octets terminée par <code>'\0'</code>. Ni l'un ni l'autre ne porte sa taille.</p></article>
+          <article><span class="concept-number">02</span><h3>La mémoire a des limites</h3><p>Lire hors tampon, écrire au mauvais endroit ou utiliser un pointeur libéré peut produire un comportement indéfini, même si « ça marche » parfois.</p></article>
+          <article><span class="concept-number">03</span><h3>Copier, ce n'est pas déplacer</h3><p><code>memcpy</code> exige des zones non chevauchantes. <code>memmove</code> garantit une copie correcte même lorsque les zones se recoupent.</p></article>
+          <article><span class="concept-number">04</span><h3>Le contrat prime sur l'habitude</h3><p>ISO C, POSIX, BSD et les fonctions <code>ft_</code> ne sont pas interchangeables. Vérifie toujours la signature, le contrat et les limites.</p></article>
+        </div>
+      </section>
+      <footer class="site-footer"><span>Libft, Égalité, Fraternité · Un carnet de révision indépendant.</span><span>Explications originales. Pas de reproduction des sujets 42.</span></footer>
+    </main>
+  </div>
+</div>
+<div id="drawer" class="drawer" hidden>
+  <div class="drawer-backdrop" data-close-drawer></div>
+  <section class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1">
+    <div class="drawer-top"><span class="tag libft" id="drawer-kind">Dans l'archive</span><button id="close-drawer" type="button" class="icon-button" aria-label="Fermer la fiche">×</button></div>
+    <div class="drawer-scroll" id="drawer-body"></div>
+  </section>
+</div>
+<script src="data/catalog.js"></script>
+<script src="scripts/app.js"></script>
+</body>
+</html>
