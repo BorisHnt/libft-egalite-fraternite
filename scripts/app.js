@@ -88,6 +88,7 @@
     sectionBox.append(head);
     const block = el("div","source-lock is-locked");
     const pre = el("pre","");
+    pre.setAttribute("aria-hidden","true");
     const formatted = el("code","",code);
     pre.append(formatted);
     block.append(pre);
@@ -98,6 +99,7 @@
     reveal.setAttribute("aria-expanded","false");
     reveal.addEventListener("click",() => {
       block.classList.remove("is-locked");
+      pre.removeAttribute("aria-hidden");
       cover.remove();
       reveal.setAttribute("aria-expanded","true");
     });
@@ -114,6 +116,7 @@
     reveal.addEventListener("click",() => { copy.hidden = false; hide.hidden = false; });
     hide.addEventListener("click",() => {
       block.classList.add("is-locked");
+      pre.setAttribute("aria-hidden","true");
       block.append(cover);
       copy.hidden = true;
       hide.hidden = true;
@@ -148,7 +151,7 @@
     section(body,"Valeur de retour",f.result);
     section(body,"Attention au piège",f.trap,true);
     if (f.example) sourceSection(body,"Exemple d'utilisation",f.example,"Exemple pédagogique : adapter les includes, le contexte et les arguments.");
-    if (f.ref) sourceSection(body,"Implémentation de référence",f.ref,"Extrait de référence rédigé pour ce manuel. Ne pas confondre avec un contrôle automatisé Norminette. Chaque fonction reste à tester sur des cas limites.");
+    if (f.ref) sourceSection(body,"Implémentation de référence",f.ref,"Extrait de référence compilé et passé dans la Norminette en CI. Les tests fonctionnels actuels ne couvrent pas encore tous les cas possibles.");
     else if (f.kind === "libft") section(body,"Implémentation de référence","Une version relue et testée sera ajoutée ici ; aucun code non vérifié n'est présenté comme solution parfaite.");
     const related = f.related.map(name => catalog.find(item => item.name === name)).filter(Boolean);
     if (related.length) {
