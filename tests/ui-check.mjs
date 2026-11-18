@@ -35,7 +35,8 @@ assert.equal(doc.querySelectorAll(".function-card").length, 57,
 assert.equal(doc.querySelector("#reader").hidden, true);
 assert.equal(doc.querySelector("#overview").hidden, false);
 
-const first = doc.querySelector(".function-card");
+const first = [...doc.querySelectorAll(".function-card")]
+  .find(card => card.querySelector("h3").textContent === "ft_strlen");
 assert(first, "At least one function is listed");
 const fName = first.querySelector("h3").textContent;
 first.click();
