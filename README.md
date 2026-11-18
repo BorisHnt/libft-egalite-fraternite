@@ -2,7 +2,7 @@
 
 Un manuel interactif et pédagogique des fonctions C, dans l'esprit de SwimmingPy et SysAndNetAdmin.
 
-**Site :** https://borishnt.github.io/libft-egalite-fraternite/
+**Site en ligne :** [Ouvrir le site](https://borishnt.github.io/libft-egalite-fraternite/)
 
 ## Au programme
 
