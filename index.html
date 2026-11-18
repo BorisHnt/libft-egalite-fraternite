@@ -37,6 +37,7 @@
       <div class="topbar-right"><span class="status-dot" aria-hidden="true"></span> 100 % local · sans compte</div>
     </header>
     <main id="content" tabindex="-1">
+      <div id="overview">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy"><span class="eyebrow"><span class="spark" aria-hidden="true">✳</span> Le C, sans brouillard</span>
           <h1 id="hero-title">Libft, Égalité,<br><em>Fraternité.</em></h1>
@@ -79,21 +80,44 @@
           <article><span class="concept-number">04</span><h3>Le contrat prime sur l'habitude</h3><p>ISO C, POSIX, BSD et les fonctions <code>ft_</code> ne sont pas interchangeables. Vérifie toujours la signature, le contrat et les limites.</p></article>
         </div>
       </section>
+      </div>
+      <article id="reader" class="reader" hidden tabindex="-1" aria-labelledby="reader-title">
+        <div class="reader-toolbar">
+          <button id="reader-back" class="reader-back" type="button">← Toutes les fonctions</button>
+          <div class="reader-toolbar-actions">
+            <button id="reader-copy-link" class="reader-action" type="button" title="Copier l'adresse de cette fiche">Copier le lien</button>
+            <button id="reader-prev" class="reader-action" type="button">← Précédente</button>
+            <button id="reader-next" class="reader-action" type="button">Suivante →</button>
+          </div>
+        </div>
+        <div class="reader-grid">
+          <div class="reader-primary">
+            <header id="reader-header" class="reader-heading"></header>
+            <div id="reader-body" class="reader-body"></div>
+          </div>
+          <aside class="reader-index" aria-label="Sommaire de la fiche">
+            <div class="reader-index-inner">
+              <strong>Dans cette fiche</strong>
+              <nav id="reader-toc" aria-label="Aller à une section"></nav>
+              <p>Le code reste masqué tant que tu ne choisis pas de le révéler.</p>
+            </div>
+          </aside>
+        </div>
+        <nav class="reader-pagination" aria-label="Navigation entre les fiches">
+          <button id="reader-prev-bottom" type="button" class="reader-pagination-button">← Fonction précédente</button>
+          <button id="reader-next-bottom" type="button" class="reader-pagination-button">Fonction suivante →</button>
+        </nav>
+      </article>
       <footer class="site-footer"><span>Libft, Égalité, Fraternité · Un carnet de révision indépendant.</span><span>Explications originales. Pas de reproduction des sujets 42.</span></footer>
     </main>
   </div>
-</div>
-<div id="drawer" class="drawer" hidden>
-  <div class="drawer-backdrop" data-close-drawer></div>
-  <section class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1">
-    <div class="drawer-top"><span class="tag libft" id="drawer-kind">Dans l'archive</span><button id="close-drawer" type="button" class="icon-button" aria-label="Fermer la fiche">×</button></div>
-    <div class="drawer-scroll" id="drawer-body"></div>
-  </section>
 </div>
 <script src="data/catalog.js"></script>
 <script src="data/references.js"></script>
 <script src="data/deepdives.js"></script>
 <script src="data/traces.js"></script>
+<script src="data/precisions.js"></script>
+<script src="scripts/precision-ui.js"></script>
 <script src="scripts/deep-dive-ui.js"></script>
 <script src="scripts/app.js"></script>
 </body>
