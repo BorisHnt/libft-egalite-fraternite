@@ -127,8 +127,7 @@ static void	test_strings(void)
 	assert(ft_strchr("banana", 'a') != NULL);
 	assert(ft_strrchr("banana", 'a') != NULL);
 	assert(ft_strchr("banana", 'x') == NULL);
-	assert(ft_strchr("banana", 0) == "banana" + 6 || 
-		*ft_strchr("banana", 0) == '\0');
+	assert(*ft_strchr("banana", 0) == '\0');
 	assert(ft_strnstr("bonjour", "jour", 7) != NULL);
 	assert(ft_strnstr("bonjour", "jour", 5) == NULL);
 	assert(ft_strnstr("bonjour", "", 0) != NULL);
@@ -182,7 +181,7 @@ static void	test_allocations(void)
 	char	expected[40];
 
 	a = ft_strdup("hello");
-	assert(a && strcmp(a, "hello") == 0 && a != "hello");
+	assert(a && strcmp(a, "hello") == 0);
 	free(a);
 	a = ft_substr("012345", 2, 3);
 	assert(a && strcmp(a, "234") == 0);
