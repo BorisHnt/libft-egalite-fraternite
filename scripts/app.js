@@ -286,12 +286,17 @@
   }
 
   function renderOverview() {
+    const fromReader = !$("#reader").hidden;
     state.current = null;
     $("#overview").hidden = false;
     $("#reader").hidden = true;
     const titles = {all:"Toutes les fonctions",libft:"Les fonctions Libft",cousins:"Les fonctions cousines"};
     $("#breadcrumb").textContent = state.family === "all" ? titles[state.view] || titles.all : state.family;
     closeNavigation();
+    if (fromReader) {
+      $("#workspace").scrollIntoView({behavior:"instant", block:"start"});
+      $("#search").focus({preventScroll:true});
+    }
   }
 
   function openFunction(f) {
