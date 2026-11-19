@@ -16,6 +16,23 @@ Manuel interactif des fonctions de Libft et des fonctions voisines du langage C.
 
 Les explications sont indépendantes des sujets officiels 42, qui ne sont ni reproduits ni intégrés.
 
+## Testeur Fedora — v0.1.0
+
+Le testeur Fedora est inclus dans le même dépôt : [voir les sources](https://github.com/BorisHnt/libft-egalite-fraternite/tree/main/tester).
+
+**[Télécharger le testeur Fedora (ZIP)](https://github.com/BorisHnt/libft-egalite-fraternite/raw/refs/heads/main/downloads/libft-egalite-fraternite-tester-v0.1.0.zip)**
+
+Décompresser le ZIP, placer les fichiers de sa Libft directement dans `libft/`, puis lancer :
+
+```sh
+./test.sh
+./test.sh --mode hardcore --function ft_itoa
+```
+
+Les tests vérifient notamment le Makefile, `libft.h`, les fonctions et les cas limites. Les rapports TXT restent dans `results/`.
+Le testeur travaille localement sur Fedora, sans envoyer les sources au site. Ne jamais le lancer avec `sudo` et n'utiliser que du code de confiance.
+Ce testeur indépendant ne prédit pas la note de 42.
+
 ## Utilisation
 
 Le site fonctionne directement avec `index.html` dans un navigateur, ou depuis GitHub Pages. Pour ouvrir une fonction spécifique, les URL ressemblent à :

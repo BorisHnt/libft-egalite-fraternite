@@ -144,3 +144,14 @@ main{max-width:1510px;margin:auto;padding:28px 4.1%}.hero{background:linear-grad
   .reader-pagination-button{padding:11px 9px}
 }
 @media(prefers-reduced-motion:reduce){.reader{animation:none}}
+
+.tester-banner{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:26px 29px;border:1px solid #cbdff4;border-radius:19px;margin:24px 0;background:linear-gradient(115deg,#eaf4ff,#f7fbff)}
+.tester-banner-copy{flex:1;min-width:0}
+.tester-banner-copy h2{font-size:clamp(21px,2.5vw,29px);line-height:1.2;letter-spacing:-.65px;margin:9px 0 9px;color:#315b86}
+.tester-banner-copy p{font-size:13px;line-height:1.75;color:#587694;max-width:75ch;margin:0}
+.tester-banner-copy code{color:#24578a;background:#dcecff;border-radius:5px;padding:1px 4px}
+.tester-banner-copy p.tester-banner-note{font-size:11px;color:#819ab5;margin:9px 0 0}
+.tester-banner-actions{display:flex;align-items:stretch;flex-direction:column;gap:8px;min-width:205px}
+.tester-banner-actions a.primary-button{text-decoration:none;text-align:center;white-space:normal}
+.tester-banner-link{text-align:center;font-size:12px;font-weight:650;text-decoration:underline;color:#486f99;padding:5px}
+@media(max-width:750px){.tester-banner{flex-direction:column;align-items:stretch;padding:21px}.tester-banner-actions{width:100%;min-width:0}}

@@ -10,6 +10,8 @@ on:
       - "styles/**"
       - "scripts/export-references.mjs"
       - "tests/**"
+      - "tester/**"
+      - "downloads/**"
       - ".github/workflows/check-references.yml"
   pull_request:
     paths:
@@ -30,6 +32,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Validate Fedora tester scripts
+        run: |
+          bash -n tester/test.sh
+          python3 -m py_compile tester/tools/audit.py
+          python3 tester/tools/audit.py --root tester --list | grep -qx "ft_itoa"
       - name: Validate website JavaScript syntax
         run: |
           node --check data/catalog.js
