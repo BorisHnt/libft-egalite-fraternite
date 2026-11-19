@@ -1,0 +1,74 @@
+name: Import Fedora Libft tester
+on:
+  push:
+    branches: [main]
+    paths:
+      - "downloads/libft-egalite-fraternite-tester-v0.1.0.tar.xz"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unpack checked archive into versioned source folder
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path, PurePosixPath
+          import tarfile
+          source = Path("downloads/libft-egalite-fraternite-tester-v0.1.0.tar.xz")
+          destination = Path("tester")
+          prefix = "libft-egalite-fraternite-tester/"
+          with tarfile.open(source, "r:xz") as archive:
+              members = archive.getmembers()
+              for member in members:
+                  if member.isdir() and member.name.rstrip("/") == prefix.rstrip("/"):
+                      continue
+                  if not member.name.startswith(prefix):
+                      raise SystemExit("Invalid archive root: " + member.name)
+                  relative = PurePosixPath(member.name[len(prefix):])
+                  if relative.is_absolute() or ".." in relative.parts or not relative.parts:
+                      raise SystemExit("Unsafe archive path: " + member.name)
+                  if member.issym() or member.islnk() or not (member.isfile() or member.isdir()):
+                      raise SystemExit("Unsupported archive member: " + member.name)
+                  target = destination.joinpath(*relative.parts)
+                  if member.isdir():
+                      target.mkdir(parents=True, exist_ok=True)
+                  else:
+                      target.parent.mkdir(parents=True, exist_ok=True)
+                      with archive.extractfile(member) as stream:
+                          target.write_bytes(stream.read())
+                      if target.name == "test.sh":
+                          target.chmod(0o755)
+          assert (destination / "test.sh").is_file()
+          assert (destination / "tools/audit.py").is_file()
+          assert (destination / "tests/functions.c").is_file()
+          assert (destination / "libft/PLACE_YOUR_LIBFT_HERE.txt").is_file()
+          print("Tester source files imported into tester/")
+          PY
+      - name: Package the Fedora ZIP
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+          root = Path("tester")
+          output = Path("downloads/libft-egalite-fraternite-tester-v0.1.0.zip")
+          with ZipFile(output, "w", compression=ZIP_DEFLATED, compresslevel=9) as archive:
+              for path in sorted(root.rglob("*")):
+                  if path.is_file():
+                      archive.write(path, "libft-egalite-fraternite-tester/" + path.relative_to(root).as_posix())
+          assert output.stat().st_size > 10000
+          print("ZIP ready:", output, output.stat().st_size)
+          PY
+          bash -n tester/test.sh
+          python3 -m py_compile tester/tools/audit.py
+      - name: Commit checked sources and ZIP
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tester downloads/libft-egalite-fraternite-tester-v0.1.0.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "feat(tester): publish Fedora source and downloadable ZIP"
+            git push origin HEAD:main
+          fi
