@@ -1,0 +1,7 @@
+/results/*
+!/results/.gitkeep
+/libft/*
+!/libft/PLACE_YOUR_LIBFT_HERE.txt
+__pycache__/
+*.pyc
+.DS_Store
